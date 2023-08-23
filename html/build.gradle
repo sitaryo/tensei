@@ -1,23 +1,23 @@
 gwt {
-    gwtVersion='2.8.2' // Should match the gwt version used for building the gwt backend
-    maxHeapSize="1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
-    minHeapSize="1G"
+    gwtVersion = '2.10.0' // Should match the gwt version used for building the gwt backend
+    maxHeapSize = "1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
+    minHeapSize = "1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
     modules 'person.licky.tensei.GdxDefinition'
     devModules 'person.licky.tensei.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
-    compiler {
-        strict = true;
-        disableCastChecking = true;
-    }
+    compiler.strict = true
+    compiler.disableCastChecking = true
+    sourceLevel = 1.11
 }
 
-import org.wisepersist.gradle.plugins.gwt.GwtSuperDev
-import org.akhikhl.gretty.AppBeforeIntegrationTestTask
 
-gretty.httpPort = 8080
+import org.akhikhl.gretty.AppBeforeIntegrationTestTask
+import org.wisepersist.gradle.plugins.gwt.GwtSuperDev
+
+gretty.httpPort = 8087
 gretty.resourceBase = project.buildDir.path + "/gwt/draftOut"
 gretty.contextPath = "/"
 gretty.portPropertiesFileName = "TEMP_PORTS.properties"
@@ -87,7 +87,8 @@ tasks.draftCompileGwt.dependsOn(addSource)
 tasks.checkGwt.dependsOn(addSource)
 checkGwt.war = file("war")
 
-sourceCompatibility = 1.7
-sourceSets.main.java.srcDirs = [ "src/" ]
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+sourceSets.main.java.srcDirs = ["src/"]
 
 eclipse.project.name = appName + "-html"
