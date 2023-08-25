@@ -19,7 +19,7 @@ android {
     }
     defaultConfig {
         applicationId "person.licky.tensei"
-        minSdkVersion 14
+        minSdkVersion 24
         targetSdkVersion 34
         versionCode 1
         versionName "1.0"
